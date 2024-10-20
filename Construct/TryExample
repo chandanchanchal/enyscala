@@ -1,0 +1,23 @@
+import scala.util.{Try, Success, Failure}
+
+object TryExample {
+  def divide(a: Int, b: Int): Try[Int] = {
+    Try(a / b) // Attempts to divide and captures any exceptions
+  }
+
+  def main(args: Array[String]): Unit = {
+    val result1 = divide(10, 2)
+    val result2 = divide(10, 0)
+
+    // Handling the result
+    result1 match {
+      case Success(value) => println(s"Result of division: $value")
+      case Failure(exception) => println(s"Error occurred: ${exception.getMessage}")
+    }
+
+    result2 match {
+      case Success(value) => println(s"Result of division: $value")
+      case Failure(exception) => println(s"Error occurred: ${exception.getMessage}")
+    }
+  }
+}
