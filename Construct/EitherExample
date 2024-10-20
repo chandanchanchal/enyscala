@@ -1,0 +1,28 @@
+object EitherExample {
+  def parseInt(input: String): Either[String, Int] = {
+    try {
+      Right(input.toInt) // Returns Right on success
+    } catch {
+      case _: NumberFormatException => Left("Invalid number format") // Returns Left on failure
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    val validInput = "123"
+    val invalidInput = "abc"
+
+    val result1 = parseInt(validInput)
+    val result2 = parseInt(invalidInput)
+
+    // Handling the result
+    result1 match {
+      case Right(value) => println(s"Parsed value: $value")
+      case Left(error) => println(s"Error: $error")
+    }
+
+    result2 match {
+      case Right(value) => println(s"Parsed value: $value")
+      case Left(error) => println(s"Error: $error")
+    }
+  }
+}
