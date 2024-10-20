@@ -1,0 +1,24 @@
+object OptionExample {
+  def main(args: Array[String]): Unit = {
+    def findElement(list: List[Int], index: Int): Option[Int] = {
+      if (index >= 0 && index < list.length) Some(list(index))
+      else None
+    }
+
+    val numbers = List(10, 20, 30, 40, 50)
+
+    // Example of using Option
+    val elementAtIndex2 = findElement(numbers, 2)
+    val elementAtIndex5 = findElement(numbers, 5)
+
+    elementAtIndex2 match {
+      case Some(value) => println(s"Element at index 2: $value")
+      case None => println("No element found at index 2")
+    }
+
+    elementAtIndex5 match {
+      case Some(value) => println(s"Element at index 5: $value")
+      case None => println("No element found at index 5")
+    }
+  }
+}
