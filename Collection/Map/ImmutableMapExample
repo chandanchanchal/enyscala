@@ -1,0 +1,40 @@
+object ImmutableMapExample {
+  def main(args: Array[String]): Unit = {
+    // Creating an immutable map
+    val fruits = Map(
+      "apple" -> 3,
+      "banana" -> 2,
+      "orange" -> 5
+    )
+
+    // Accessing values
+    println(s"Number of apples: ${fruits("apple")}")
+    
+    // Iterating over the map
+    println("All fruits and their quantities:")
+    fruits.foreach { case (fruit, quantity) =>
+      println(s"$fruit: $quantity")
+    }
+
+    // Checking if a key exists
+    val keyToCheck = "banana"
+    if (fruits.contains(keyToCheck)) {
+      println(s"Found $keyToCheck with quantity: ${fruits(keyToCheck)}")
+    } else {
+      println(s"$keyToCheck not found in the map.")
+    }
+
+    // Attempting to add a new entry (this won't modify the original map)
+    val updatedFruits = fruits + ("grape" -> 4)
+    println("Updated fruits map:")
+    updatedFruits.foreach { case (fruit, quantity) =>
+      println(s"$fruit: $quantity")
+    }
+    
+    // Original map remains unchanged
+    println("Original fruits map after attempted update:")
+    fruits.foreach { case (fruit, quantity) =>
+      println(s"$fruit: $quantity")
+    }
+  }
+}
