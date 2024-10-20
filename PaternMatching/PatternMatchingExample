@@ -1,0 +1,35 @@
+object PatternMatchingExample {
+  def main(args: Array[String]): Unit = {
+    // Example 1: Matching on integers
+    val num: Int = 42
+
+    num match {
+      case 0 => println("Zero")
+      case 1 => println("One")
+      case 2 => println("Two")
+      case n if n < 0 => println("Negative number")
+      case n => println(s"Other number: $n")
+    }
+
+    // Example 2: Matching on Strings
+    val day: String = "Monday"
+
+    day match {
+      case "Monday" => println("Start of the week")
+      case "Friday" => println("End of the week")
+      case "Saturday" | "Sunday" => println("Weekend")
+      case _ => println("Midweek day")
+    }
+
+    // Example 3: Matching on case classes
+    case class Point(x: Int, y: Int)
+
+    val point: Point = Point(10, 20)
+
+    point match {
+      case Point(0, 0) => println("Origin")
+      case Point(x, y) if x == y => println(s"On the line x = y: ($x, $y)")
+      case Point(x, y) => println(s"Point at ($x, $y)")
+    }
+  }
+}
