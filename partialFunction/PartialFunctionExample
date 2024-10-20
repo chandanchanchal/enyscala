@@ -1,0 +1,28 @@
+object PartialFunctionExample extends App {
+
+  // A partial function that handles only positive integers
+  val positiveNumbers: PartialFunction[Int, String] = {
+    case x if x > 0 => s"$x is positive"
+  }
+
+  // Checking if the partial function is defined for a specific value
+  println(positiveNumbers.isDefinedAt(5))   // true
+  println(positiveNumbers.isDefinedAt(-3))  // false
+
+  // Applying the partial function (only works for positive numbers)
+  if (positiveNumbers.isDefinedAt(5)) {
+    println(positiveNumbers(5))   // "5 is positive"
+  }
+
+  // Handling partial function safely
+  val handleNumber: PartialFunction[Int, String] = {
+    case x if x > 0 => s"$x is positive"
+    case x if x == 0 => "Zero"
+    case x if x < 0 => s"$x is negative"
+  }
+
+  // Testing with different values
+  println(handleNumber(10))   // "10 is positive"
+  println(handleNumber(0))    // "Zero"
+  println(handleNumber(-10))  // "-10 is negative"
+}
