@@ -1,0 +1,26 @@
+object FunctionalTransformationExample {
+  def main(args: Array[String]): Unit = {
+    // A list of integers
+    val numbers = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+    // 1. Using map to double each element
+    val doubled = numbers.map(num => num * 2)
+    println("Doubled numbers:")
+    println(doubled) // Output: List(2, 4, 6, 8, 10, 12, 14, 16, 18, 20)
+
+    // 2. Using filter to keep only even numbers
+    val evens = numbers.filter(num => num % 2 == 0)
+    println("Even numbers:")
+    println(evens) // Output: List(2, 4, 6, 8, 10)
+
+    // 3. Using reduce to calculate the sum of all numbers
+    val sum = numbers.reduce((acc, num) => acc + num)
+    println("Sum of all numbers:")
+    println(sum) // Output: 55
+
+    // 4. Combining transformations: double the numbers, then filter evens, and calculate the sum
+    val result = numbers.map(num => num * 2).filter(num => num % 2 == 0).reduce((acc, num) => acc + num)
+    println("Sum of doubled even numbers:")
+    println(result) // Output: 110
+  }
+}
