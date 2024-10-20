@@ -1,0 +1,41 @@
+object SetExample {
+  def main(args: Array[String]): Unit = {
+    // Creating an immutable Set
+    val fruits = Set("apple", "banana", "orange", "grape", "apple") // 'apple' will be ignored as it's a duplicate
+    println("Immutable Set of fruits:")
+    fruits.foreach(println) // Iterating over the set
+
+    // Checking membership
+    println(s"Does the set contain 'banana'? ${fruits.contains("banana")}") // true
+    println(s"Does the set contain 'kiwi'? ${fruits.contains("kiwi")}") // false
+
+    // Creating a mutable Set
+    import scala.collection.mutable
+    val mutableFruits = mutable.Set("apple", "banana", "orange")
+
+    // Adding elements
+    mutableFruits += "kiwi" // Using += to add an element
+    mutableFruits += "mango"
+    println("Mutable Set after adding kiwi and mango:")
+    mutableFruits.foreach(println)
+
+    // Removing an element
+    mutableFruits -= "banana" // Using -= to remove an element
+    println("Mutable Set after removing banana:")
+    mutableFruits.foreach(println)
+
+    // Set operations
+    val moreFruits = Set("peach", "grape", "kiwi")
+    val combinedSet = fruits union moreFruits // Union of two sets
+    println("Combined Set:")
+    combinedSet.foreach(println)
+
+    val intersectionSet = fruits intersect moreFruits // Intersection of two sets
+    println("Intersection Set:")
+    intersectionSet.foreach(println)
+
+    val differenceSet = fruits diff moreFruits // Difference of two sets
+    println("Difference Set (fruits - moreFruits):")
+    differenceSet.foreach(println)
+  }
+}
