@@ -1,0 +1,34 @@
+object ListExample {
+  def main(args: Array[String]): Unit = {
+    // Creating a List
+    val fruits = List("apple", "banana", "orange", "grape")
+
+    // Accessing elements
+    println(s"First fruit: ${fruits(0)}") // Access by index
+    println(s"Last fruit: ${fruits.last}") // Access last element
+
+    // Iterating over the List
+    println("All fruits:")
+    fruits.foreach(fruit => println(fruit))
+
+    // Prepending an element (adds to the front)
+    val moreFruits = "kiwi" :: fruits // `::` is the prepend operator
+    println("Fruits after prepending kiwi:")
+    moreFruits.foreach(fruit => println(fruit))
+
+    // Appending an element
+    val updatedFruits = moreFruits :+ "mango" // `:+` is the append operator
+    println("Fruits after appending mango:")
+    updatedFruits.foreach(fruit => println(fruit))
+
+    // Creating a new List from existing elements (map operation)
+    val upperCaseFruits = updatedFruits.map(_.toUpperCase) // Converts each fruit to uppercase
+    println("Fruits in uppercase:")
+    upperCaseFruits.foreach(fruit => println(fruit))
+    
+    // Filtering the List (keeping only fruits with 'A' in their name)
+    val filteredFruits = updatedFruits.filter(fruit => fruit.contains("a"))
+    println("Fruits containing 'a':")
+    filteredFruits.foreach(fruit => println(fruit))
+  }
+}
