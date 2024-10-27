@@ -1,0 +1,3 @@
+libraryDependencies += "com.typesafe.slick" %% "slick" % "3.4.1"
+libraryDependencies += "com.typesafe.slick" %% "slick-hikaricp" % "3.4.1" // Connection pool
+libraryDependencies += "org.postgresql" % "postgresql" % "42.5.4" // PostgreSQL driver
