@@ -1,0 +1,72 @@
+import slick.jdbc.PostgresProfile.api._
+import scala.concurrent.Await
+import scala.concurrent.duration._
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
+
+// Step 1: Define a case class to represent a User
+case class User(id: Int, name: String, email: String)
+
+// Step 2: Define the Users table schema
+class Users(tag: Tag) extends Table[User](tag, "users") {
+  // Define table columns: id, name, email
+  def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
+  def name = column[String]("name")
+  def email = column[String]("email")
+  
+  // Mapping case class to table columns
+  def * = (id, name, email) <> (User.tupled, User.unapply)
+}
+
+// Step 3: Set up database connection
+val db = Database.forConfig("mydb")
+
+// Step 4: Create an instance of the Users table
+val users = TableQuery[Users]
+
+// Step 5: CRUD Operations Example
+object SlickExample extends App {
+  
+  // Helper function to execute queries
+  def exec[T](action: DBIO[T]): T = Await.result(db.run(action), 10.seconds)
+  
+  // Creating the Users table
+  val createTableAction = DBIO.seq(
+    users.schema.createIfNotExists
+  )
+  exec(createTableAction)
+
+  // Inserting some users
+  val insertUsersAction = DBIO.seq(
+    users += User(0, "Alice", "alice@example.com"),
+    users += User(0, "Bob", "bob@example.com")
+  )
+  exec(insertUsersAction)
+
+  // Querying all users
+  val allUsers: Future[Seq[User]] = db.run(users.result)
+  allUsers.map { userList =>
+    println("All Users in Database:")
+    userList.foreach(println)
+  }
+
+  // Updating a user
+  val updateAction = users.filter(_.name === "Alice")
+    .map(_.email)
+    .update("alice.new@example.com")
+  exec(updateAction)
+
+  // Deleting a user
+  val deleteAction = users.filter(_.name === "Bob").delete
+  exec(deleteAction)
+
+  // Fetch updated list of users
+  val updatedUsers: Future[Seq[User]] = db.run(users.result)
+  updatedUsers.map { updatedUserList =>
+    println("Updated Users in Database:")
+    updatedUserList.foreach(println)
+  }
+  
+  // Clean up resources
+  Await.result(db.shutdown, 10.seconds)
+}
