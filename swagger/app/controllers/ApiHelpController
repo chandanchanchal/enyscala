@@ -1,0 +1,16 @@
+package controllers
+
+import javax.inject._
+import play.api.mvc._
+import play.api.libs.json.Json
+import play.api.routing.Router
+import play.modules.swagger._
+
+@Singleton
+class ApiHelpController @Inject()(cc: ControllerComponents, router: Router) extends SwaggerBaseApiController(cc) {
+
+  // Generates the Swagger JSON for API documentation
+  def getResources = Action { request =>
+    Ok(Json.toJson(SwaggerSpecGenerator(false, "controllers").generate()))
+  }
+}
