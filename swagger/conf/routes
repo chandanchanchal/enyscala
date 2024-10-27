@@ -1,0 +1,7 @@
+GET     /items                  controllers.ItemController.getItems
+GET     /items/:id              controllers.ItemController.getItemById(id: Int)
+
+
+# Swagger Documentation
+GET     /docs/swagger.json      controllers.ApiHelpController.getResources
+GET     /swagger-ui             controllers.Assets.at(path="/public/lib/swagger-ui", file="index.html")
