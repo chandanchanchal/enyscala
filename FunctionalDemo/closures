@@ -1,0 +1,52 @@
+var div = 2
+var isEven = (x: Int) => x % div == 0
+
+isEven is a closure because:
+It captures div, which is defined outside its body.
+div is a mutable variable, meaning isEven will use the latest value of div
+
+Why Is isEven a Closure?
+Captures div, which is a mutable variable.
+If we change div, it will affect future results:
+
+div = 3
+println(isEven(6))  // Now checks '6 % 3 == 0', returns true
+
+Example: Filtering a List
+
+val threshold = 10
+val isGreaterThanThreshold = (x: Int) => x > threshold  // Closure captures `threshold`
+
+val numbers = List(5, 15, 8, 20)
+val filtered = numbers.filter(isGreaterThanThreshold) 
+
+println(filtered)  // Output: List(15, 20)
+
+
+3. Custom Function Factories
+Closures let us generate custom functions based on dynamic input.
+
+Example: Creating Custom Multipliers
+
+def multiplier(factor: Int) = (x: Int) => x * factor  // Closure captures `factor`
+
+val double = multiplier(2)
+val triple = multiplier(3)
+
+println(double(5))  // Output: 10
+println(triple(5))  // Output: 15
+
+
+4. Simplifying Callbacks & Functional Programming
+Closures make it easy to pass functions dynamically, making functional programming cleaner and more intuitive.
+
+Example: Delayed Execution (Higher-Order Function)
+
+def delayedExecution(operation: () => Unit): Unit = {
+  println("Executing later...")
+  operation()
+}
+
+val greet = () => println("Hello, Scala!")  // Closure with no parameters
+
+delayedExecution(greet)
