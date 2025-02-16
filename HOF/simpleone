@@ -7,3 +7,8 @@ def playwithtwonum(a: Int, b: Int, operation: (Int, Int)=> Int): Int = {
 val result = playwithtwonum(4,5,sum)
 
 println(result)
+
+
+########---Anonymous one----######
+val result2 = operateOnTwoNumbers(4, 6, (x, y) => x + y)
+println(result2) 
