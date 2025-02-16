@@ -1,0 +1,9 @@
+def sum(x: Int, y: Int): Int = {x+y}
+
+def playwithtwonum(a: Int, b: Int, operation: (Int, Int)=> Int): Int = {
+ operation(a,b)
+}
+
+val result = playwithtwonum(4,5,sum)
+
+println(result)
